@@ -1,4 +1,4 @@
-package collections;
+package stream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class FunctionalTests {
         Function<Integer, Integer> adder1 = x -> x + 1;
 
         // with multiple statements
-        Function<Integer, Integer> adder2 = (x) -> {
+        Function<Integer, Integer> adder2 = x -> {
             x += 2;
             x += 3;
             return x;
