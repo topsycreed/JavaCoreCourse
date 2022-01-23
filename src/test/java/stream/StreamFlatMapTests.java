@@ -3,6 +3,7 @@ package stream;
 import org.junit.jupiter.api.Test;
 import streamAPI.Book;
 import streamAPI.Month;
+import streamAPI.User;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +16,7 @@ public class StreamFlatMapTests {
 
     @Test
     void mapToObjTest() {
-        List<Month> months = IntStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+        List<Month> months = IntStream.rangeClosed(1, 12)
                 .mapToObj(Month::new)
                 .collect(Collectors.toList());
         System.out.println(months);
@@ -48,5 +49,29 @@ public class StreamFlatMapTests {
                 .stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList())); //[a, b] one single list!
+    }
+
+    @Test
+    void peekTest2() {
+        Stream<User> userStream = Stream.of(new User("Alice"), new User("Bob"), new User("Chuck"));
+        userStream
+                .map(u -> u.getName().toLowerCase())
+                .forEach(System.out::println);
+
+        Stream<User> userStream2 = Stream.of(new User("Alice"), new User("Bob"), new User("Chuck"));
+        userStream2
+                .peek(u -> u.setName(u.getName().toLowerCase()))
+                .forEach(System.out::println);
+    }
+
+    @Test
+    void peekTest() {
+        List<String> list = Stream.of("one", "two", "three", "four")
+                .filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
+        System.out.println(list);
     }
 }
