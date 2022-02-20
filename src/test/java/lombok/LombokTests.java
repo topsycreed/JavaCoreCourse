@@ -8,6 +8,12 @@ import java.io.IOException;
 public class LombokTests {
 
     @Test
+    void Required() {
+        Computer3 computer31 = new Computer3("title", 1);
+        Computer3 computer3 = new Computer3("title", 1, true);
+    }
+
+    @Test
     void dataTest1() {
 //        Computer computer = new Computer("Macbook", 16, false); //not working due RequiredArgsConstructor, you need to add AllArgsConstructor
         Computer computer2 = new Computer();
