@@ -68,13 +68,14 @@ public class ReflectionTests {
     @Test
     void getFieldValue() throws IllegalAccessException {
         Student student = new Student("Gennady", "Chursov");
+        Student student2 = new Student("Alex", "Smirnov");
         Class clazz = student.getClass();
         Field[] fields = clazz.getDeclaredFields();
 
 //        for (Field field : fields) {
-//            System.out.println(field.getName() + " " + field.get(student));
+//            System.out.println(field.getName() + " " + field.get(student2));
 //        }
-        //class reflection.ReflectionTests cannot access a member of class reflection.Student with modifiers "private"
+//        class reflection.ReflectionTests cannot access a member of class reflection.Student with modifiers "private"
 
         for (Field field : fields) {
             field.setAccessible(true);
@@ -99,7 +100,11 @@ public class ReflectionTests {
             field.setAccessible(true);
             if (!Modifier.isFinal(field.getModifiers())) {
                 if (field.getType() == int.class) {
-                    field.set(student, (int) field.get(student) + 1);
+                    if (field.get(student).equals(Integer.MAX_VALUE)) {
+                        field.set(student, (int) field.get(student) - 1);
+                    } else {
+                        field.set(student, (int) field.get(student) + 1);
+                    }
                 } else {
                     field.set(student, field.get(student) + " new");
                 }
@@ -132,6 +137,12 @@ public class ReflectionTests {
             System.out.println("Constructor:");
             if (params.length == 0) {
                 System.out.println("No params");
+                constructor.newInstance();
+                continue;
+            }
+            if (params.length == 2) {
+                System.out.println("2 params");
+                constructor.newInstance("name", "surname");
                 continue;
             }
 
@@ -143,7 +154,7 @@ public class ReflectionTests {
         }
 
         Constructor constructor = clazz.getDeclaredConstructor(String.class, String.class);
-        Object instance = constructor.newInstance("name", "surname");
+        Object instance = constructor.newInstance("gennady", "chursov");
         System.out.println(instance.getClass().getField("firstName").get(instance));
         System.out.println(instance.getClass().getField("lastName").get(instance));
     }
