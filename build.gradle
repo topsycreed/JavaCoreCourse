@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.22'
     implementation 'ch.qos.logback:logback-classic:1.2.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
