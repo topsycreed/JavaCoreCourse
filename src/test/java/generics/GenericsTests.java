@@ -10,7 +10,7 @@ public class GenericsTests {
         GenericType<Integer> obj1 = new GenericType<Integer>(10);
         GenericType<String> obj2 = new GenericType<String>("abc");
 
-        Assertions.assertEquals(10, (int) obj1.getT());
+        Assertions.assertEquals(10, obj1.getT());
         Assertions.assertEquals("abc", obj2.getT());
     }
 
