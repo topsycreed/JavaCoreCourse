@@ -1,10 +1,22 @@
 package files;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class FilesTests {
+
+    private final String PREPARED_FILE_NAME = "test.txt";
 
     @Test
     void FileCheckOSSeparatorTest() {
@@ -40,5 +52,53 @@ public class FilesTests {
 
         File file2 = new File("images/picture.jpg"); // a file on Windows
         System.out.println(file2.getPath());
+    }
+
+    @Test
+    void ScannerTest() throws FileNotFoundException {
+        File file = new File(PREPARED_FILE_NAME);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            System.out.println(scanner.nextLine());
+        }
+    }
+
+    @Test
+    void ScannerTryWithResourcesTest() {
+        File file = new File(PREPARED_FILE_NAME);
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextInt()) {
+                System.out.println(scanner.nextLine() + " ");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No file found: " + file.getPath());
+        }
+    }
+
+    @Test
+    void ReadAllTextFromFileAsSingleStringTest() throws IOException {
+        String data = new String(Files.readAllBytes(Paths.get(PREPARED_FILE_NAME)));
+        System.out.println(data);
+    }
+
+    @BeforeAll
+    private void start() throws IOException {
+        File file = new File(PREPARED_FILE_NAME);
+        if (!file.exists()) {
+            Files.createFile(file.toPath());
+            FileWriter writer = new FileWriter(file, true);
+            writer.write("Hello, Java!\n");
+            writer.write("This is simple text");
+            writer.write("123");
+            writer.close();
+        }
+    }
+
+    @AfterAll
+    private void end() {
+        File file = new File(PREPARED_FILE_NAME);
+        file.delete();
     }
 }
