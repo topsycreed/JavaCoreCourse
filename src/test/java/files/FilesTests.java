@@ -5,10 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -104,6 +101,163 @@ public class FilesTests {
     void ReadAllTextFromFileAsSingleStringTest() throws IOException {
         String data = new String(Files.readAllBytes(Paths.get(PREPARED_FILE_NAME)));
         System.out.println(data);
+    }
+
+    @Test
+    void createNewFile() {
+        File file = new File("file.txt");
+        try {
+            boolean createdNew = file.createNewFile();
+            if (createdNew) {
+                System.out.println("The file was successfully created.");
+            } else {
+                System.out.println("The file already exists.");
+                file.delete();
+            }
+        } catch (IOException e) {
+            System.out.println("Cannot create the file: " + file.getPath());
+        }
+    }
+
+    @Test
+    void creatingDirectories() {
+        File file = new File("/files/test");
+
+        boolean createdNewDirectory = file.mkdir(); //creates the directory and returns true only if it was created
+        if (createdNewDirectory) {
+            System.out.println("It was successfully created.");
+        } else {
+            System.out.println("It was not created.");
+            if (file.isDirectory()) {
+                System.out.println("But it already exists: " + file.getAbsolutePath());
+            }
+        }
+    }
+
+    @Test
+    void creatingDirectories2() {
+        File file = new File("/files/test");
+
+        boolean createdNewDirectory = file.mkdirs(); //creates the directory (including all needed subdirectories) and returns true only if it was created
+        if (createdNewDirectory) {
+            System.out.println("It was successfully created.");
+        } else {
+            System.out.println("It was not created.");
+            if (file.isDirectory()) {
+                System.out.println("But it already exists: " + file.getAbsolutePath());
+            }
+        }
+    }
+
+    @Test
+    void deleteDir() {
+        File dir = new File("/files/test");
+        File dir2 = new File("/files");
+
+        if (dir.delete()) {
+            System.out.println("Dir was successfully removed.");
+        } else {
+            System.out.println("Dir was not removed.");
+        }
+
+        if (dir2.delete()) {
+            System.out.println("Dir2 was successfully removed.");
+        } else {
+            System.out.println("Dir2 was not removed.");
+        }
+    }
+
+    @Test
+    void deleteDirWithAllNestedFiles() throws IOException {
+        creatingDirectories2();
+        File dir = new File("/files/test");
+        File file = new File(dir.getPath() + "/delete.txt");
+        if (!file.exists()) {
+            Files.createFile(file.toPath());
+            FileWriter writer = new FileWriter(file);
+            writer.write("I will be deleted soon :( ");
+            writer.close();
+        }
+        deleteDirRecursively(dir);
+    }
+
+    private void deleteDirRecursively(File dir) {
+        if (dir.exists()) {
+            File[] children = dir.listFiles();
+            for (File child : children) {
+                if (child.isDirectory()) {
+                    deleteDirRecursively(child);
+                } else {
+                    child.delete();
+                    System.out.println("Child was deleted! With name = " + child.getName());
+                }
+            }
+            dir.delete();
+            System.out.println("Dir and all nested files deleted!");
+        } else {
+            System.out.println("There are no such dir");
+        }
+    }
+
+    @Test
+    void renamingTest() throws IOException {
+        File dir = new File("/files");
+        dir.mkdir();
+        File file = new File("/files/rename.txt");
+        file.createNewFile();
+        file.renameTo(new File("/files/rename2.txt"));
+        System.out.println(file.getName());
+        //file.delete();//will not delete it
+
+        //You should get a new instance to delete it
+        File file2 = new File("/files/rename2.txt");
+        file2.delete();
+    }
+
+    @Test
+    void movingTest() throws IOException {
+        File dir = new File("/files");
+        dir.mkdir();
+        File dir2 = new File("/files2");
+        dir2.mkdir();
+        File file = new File("/files/rename.txt");
+        file.createNewFile();
+        file.renameTo(new File("/files2/rename2.txt"));
+        System.out.println(file.getName());
+        //file.delete();//will not delete it
+
+        //You should get a new instance to delete it
+        File file2 = new File("/files2/rename2.txt");
+//        file2.delete();
+    }
+
+    @Test
+    void WriterWithTry() throws IOException {
+        File file = new File(PREPARED_FILE_NAME);
+
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write("\nHello, World");//overrides the content
+        } catch (IOException e) {
+            System.out.printf("An exception occurs %s", e.getMessage());
+        }
+
+        ReadAllTextFromFileAsSingleStringTest();
+    }
+
+    @Test
+    void PrintWriterTest() throws IOException {
+        File file = new File(PREPARED_FILE_NAME);
+
+        try (PrintWriter printWriter = new PrintWriter(file)) {
+            printWriter.print("Hello"); // prints a string
+            printWriter.println("Java"); // prints a string and then terminates the line
+            printWriter.println(123); // prints a number
+            printWriter.printf("You have %d %s", 400, "gold coins"); // prints a formatted string
+        } catch (IOException e) {
+            System.out.printf("An exception occurs %s", e.getMessage());
+        }
+
+        ReadAllTextFromFileAsSingleStringTest();
     }
 
     @BeforeAll
