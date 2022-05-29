@@ -78,6 +78,29 @@ public class FilesTests {
     }
 
     @Test
+    void checkFileDirectory() {
+        File baseFile = new File(System.getProperty("user.dir"));
+        File[] files = baseFile.listFiles();
+        for (File file : files) {
+            System.out.println(file.getName());
+        }
+    }
+
+    @Test
+    void checkFileSearch() {
+        String fileToSearch = "test.txt";
+        File baseFile = new File(System.getProperty("user.dir"));
+        File[] files = baseFile.listFiles();
+        for (File file : files) {
+            if (file.getName().equals(fileToSearch)) {
+                System.out.println("File found!");
+                return;
+            }
+        }
+        System.out.println("File not found!");
+    }
+
+    @Test
     void ReadAllTextFromFileAsSingleStringTest() throws IOException {
         String data = new String(Files.readAllBytes(Paths.get(PREPARED_FILE_NAME)));
         System.out.println(data);
