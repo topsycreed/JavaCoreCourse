@@ -149,4 +149,49 @@ public class StringRegexTests {
         Assertions.assertFalse(" AB ".matches(regex)); //false, 'B' is not a digit
         Assertions.assertFalse(" -1 ".matches(regex)); //false, '-' is not an alphanumeric character, but '1' is OK.
     }
+
+    @Test
+    void quantifiersTests() {
+        String regex = "ca+b";
+
+        Assertions.assertTrue("cab".matches(regex)); // true
+        Assertions.assertTrue("caaaaab".matches(regex)); // true
+        Assertions.assertFalse("cb".matches(regex)); // false, because it does not have at least one repetition of'a'
+
+        regex = "A[0-3]*";
+
+        Assertions.assertTrue("A".matches(regex)); // true, because the pattern matches zero or more repetitions
+        Assertions.assertTrue("A0".matches(regex)); // true
+        Assertions.assertTrue("A000111222333".matches(regex)); // true
+
+        regex = ".*test.*"; // it matches all strings containing the substring "test"
+
+        Assertions.assertTrue("I'm testing programs".matches(regex)); // true
+        Assertions.assertTrue("test".matches(regex)); // true
+        Assertions.assertFalse("I'm developing programs".matches(regex)); // false
+
+        regex = "[0-9]{4}"; // four digits
+
+        Assertions.assertTrue("6342".matches(regex)); // true
+        Assertions.assertTrue("9034".matches(regex)); // true
+        Assertions.assertFalse("01234".matches(regex)); // false
+
+        regex = "[1234]{2,3}";
+
+        Assertions.assertFalse("1".matches(regex)); // false
+        Assertions.assertTrue("12".matches(regex)); // true
+        Assertions.assertTrue("123".matches(regex)); // true
+        Assertions.assertFalse("1234".matches(regex)); // false
+
+        regex = "ab{4,}";
+
+        Assertions.assertFalse("abbb".matches(regex)); // false
+        Assertions.assertTrue("abbbb".matches(regex)); // true
+        Assertions.assertTrue("abbbbbbbbbbbb".matches(regex)); // true
+
+        regex = "Do you have a{0,1}.?cats?\\?";
+
+        Assertions.assertTrue("Do you have cats?".matches(regex)); // true
+        Assertions.assertTrue("Do you have a cat?".matches(regex)); // true
+    }
 }
