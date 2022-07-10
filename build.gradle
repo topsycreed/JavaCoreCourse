@@ -22,5 +22,6 @@ dependencies {
 }
 
 test {
+    systemProperty "vmProperty", System.getProperty("vmProperty")
     useJUnitPlatform()
 }
