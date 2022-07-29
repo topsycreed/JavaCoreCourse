@@ -46,6 +46,12 @@ public class PropertiesTests {
         assertEquals(System.getProperty("vmProperty"), "vmPropertyValue");
     }
 
+    @Test
+    void LoadEnvPropertyTest() {
+        assertEquals(System.getenv("vmProperty"), "vmPropertyValue");
+
+    }
+
     @SneakyThrows(IOException.class)
     private static Properties getPropertiesFromFile() {
         Properties properties = new Properties();
