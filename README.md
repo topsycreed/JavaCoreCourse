@@ -2,6 +2,7 @@
 [telegram]: https://t.me/topsycreed
 [linkedIn]: https://www.linkedin.com/in/chursovg/
 [email]: mailto:qamentor@mail.ru
+[get_mentor]: https://getmentor.dev/mentor/gennadiy-chursov-167
 
 Source code with Java examples for topics:
 
@@ -26,10 +27,13 @@ Source code with Java examples for topics:
 19. Files
 20. Regular expressions
 21. Properties
+22. Base algorithms
+23. Base syntax of Java program
 
 [Lectures and additional info (russian language)][lectures_link]
 
-If you have questions or want to arrange mentoring sessions (RU/ENG):
+If you have questions or want to arrange mentoring sessions (RUS/ENG):
 1. Telegram: [@topsycreed][telegram]
 2. LinkedIn: [Gennadii Chursov][linkedIn]
 3. Email: [qamentor@mail.ru][email]
+4. Get mentor page (RUS): [link] [get_mentor]
