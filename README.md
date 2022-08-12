@@ -29,6 +29,8 @@ Source code with Java examples for topics:
 21. Properties
 22. Base algorithms
 23. Base syntax of Java program
+24. Type casting and scanner
+25. Arithmetic, bitwise and bit-shift operations
 
 [Lectures and additional info (russian language)][lectures_link]
 
@@ -36,4 +38,4 @@ If you have questions or want to arrange mentoring sessions (RUS/ENG):
 1. Telegram: [@topsycreed][telegram]
 2. LinkedIn: [Gennadii Chursov][linkedIn]
 3. Email: [qamentor@mail.ru][email]
-4. Get mentor page (RUS): [link] [get_mentor]
+4. Get mentor page (RUS): [link][get_mentor]
