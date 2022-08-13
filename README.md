@@ -31,6 +31,7 @@ Source code with Java examples for topics:
 23. Base syntax of Java program
 24. Type casting and scanner
 25. Arithmetic, bitwise and bit-shift operations
+26. Finding min/max in array, linear and binary search
 
 [Lectures and additional info (russian language)][lectures_link]
 
