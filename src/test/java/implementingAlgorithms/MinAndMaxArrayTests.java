@@ -23,7 +23,7 @@ public class MinAndMaxArrayTests {
     @Test
     void runFindMinMaxValuesBySortedArray() {
         Assertions.assertEquals(0, findIndexOfMinValueBySorting(numbers1));
-        Assertions.assertEquals(4, findIndexOfMaxValueBySorting(numbers2));
+        Assertions.assertEquals(4, findIndexOfMaxValueBySorting(numbers1));
     }
 
     private static int findIndexOfMaxValue(int[] numbers) {

@@ -13,7 +13,7 @@ public class LinearSearchArrayTests {
 
     @Test
     void runFindValues() {
-        Assertions.assertEquals(2, findIndexOfValue(numbers1, 3));
+        Assertions.assertEquals(0, findIndexOfValue(numbers1, 1));
         Assertions.assertEquals(4, findIndexOfValue(numbers2, 1));
         Assertions.assertEquals(-1, findIndexOfValue(numbers3, 1));
         Assertions.assertEquals(2, findIndexOfValue(numbers4, 3));
@@ -32,7 +32,7 @@ public class LinearSearchArrayTests {
         if (numbers.length == 0) {
             return index;
         }
-        for (int i = 1; i < numbers.length; i++) {
+        for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] == value) {
                 index = i;
                 break;
