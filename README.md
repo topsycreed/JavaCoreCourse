@@ -33,6 +33,7 @@ Source code with Java examples for topics:
 25. Arithmetic, bitwise and bit-shift operations
 26. Finding min/max in array, linear and binary search
 27. Floating-point types and boolean
+28. Bubble and insertion sort
 
 [Lectures and additional info (russian language)][lectures_link]
 
