@@ -34,6 +34,9 @@ Source code with Java examples for topics:
 26. Finding min/max in array, linear and binary search
 27. Floating-point types and boolean
 28. Bubble and insertion sort
+29. Special floating-point values: Infinity and NaN
+30. Relational operators
+31. Increment and decrement
 
 [Lectures and additional info (russian language)][lectures_link]
 
