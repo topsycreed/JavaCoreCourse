@@ -37,6 +37,10 @@ Source code with Java examples for topics:
 29. Special floating-point values: Infinity and NaN
 30. Relational operators
 31. Increment and decrement
+32. Characters
+33. If conditional statement
+34. Ternary operator
+35. For loop
 
 [Lectures and additional info (russian language)][lectures_link]
 
