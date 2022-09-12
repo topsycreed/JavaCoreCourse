@@ -41,6 +41,7 @@ Source code with Java examples for topics:
 33. If conditional statement
 34. Ternary operator
 35. For loop
+36. While, switch and branching statements
 
 [Lectures and additional info (russian language)][lectures_link]
 
