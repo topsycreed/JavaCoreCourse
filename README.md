@@ -3,6 +3,7 @@
 [linkedIn]: https://www.linkedin.com/in/chursovg/
 [email]: mailto:qamentor@mail.ru
 [get_mentor]: https://getmentor.dev/mentor/gennadiy-chursov-167
+[youtube]: https://www.youtube.com/channel/UCmjpXWzZGN7ntVTE8q87QTg
 
 Source code with Java examples for topics:
 
@@ -44,6 +45,8 @@ Source code with Java examples for topics:
 36. While, switch and branching statements
 
 [Lectures and additional info (russian language)][lectures_link]
+
+[YouTube channel with lectures, mentoring and mock interviews][youtube]
 
 If you have questions or want to arrange mentoring sessions (RUS/ENG):
 1. Telegram: [@topsycreed][telegram]
