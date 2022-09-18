@@ -43,6 +43,7 @@ Source code with Java examples for topics:
 34. Ternary operator
 35. For loop
 36. While, switch and branching statements
+37. Merge sort
 
 [Lectures and additional info (russian language)][lectures_link]
 
