@@ -45,6 +45,7 @@ Source code with Java examples for topics:
 36. While, switch and branching statements
 37. Merge sort
 38. Search char or substring in text algorithms
+39. Class: fields, methods, constructors
 
 [Lectures and additional info (russian language)][lectures_link]
 
