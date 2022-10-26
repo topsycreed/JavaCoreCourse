@@ -1,3 +1,7 @@
+import natalieHomework.Animal;
+import natalieHomework.Cow;
+import natalieHomework.Horse;
+
 import java.util.Scanner;
 
 public class Main {
@@ -9,30 +13,20 @@ public class Main {
     multiline comments
      */
     public static void main(String[] args) { //method
-        //block
-        System.out.println("Hello, QA!"); //statement
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Hey, what's your name?");
-        String word1 = scanner.next(); //single word or value
-        System.out.println("Nice to meet you " + word1);
-        scanner.nextLine(); // to ask user input additionally
-        System.out.println("What's your full name?");
-        String line1 = scanner.nextLine(); //line
-        System.out.println(line1 + " Is it correct?");
-
-        System.out.println("Guess how many years I'm as QA?");
-
-        int value = Integer.parseInt(scanner.next());
-        while(value != 11) {
-            if (Math.abs(11 - value) < 2) {
-                System.out.println("Close, but not correct, try one more time");
-            } else {
-                System.out.println("It's not even close! Try one more time");
-            }
-            value = Integer.parseInt(scanner.next());
-        }
-        System.out.println("Correct!");
+        Animal animal1 = new Cow();
+        Animal animal2 = new Horse();
+        animal1.say();
+        animal2.say();
+        animal1.say("test");
+        animal2.say("test");
+        Horse horse = new Horse();
+        horse.setSpeed(5.0d);
+        horse.printSpeed();
+        ((Horse) animal2).setSpeed(4.0d);
+        ((Horse) animal2).printSpeed();
+        System.out.println("count: " + horse.getCount());
+        Cow cow = new Cow("Murka", 2, "Murenocka", true);
+        System.out.println("All fields: " + cow);
+        System.out.println("All fields: " + horse);
     }
 }
