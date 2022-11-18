@@ -19,7 +19,16 @@ public class Main {
     private static List<Cow> cows = new ArrayList<>();
 
     public static void main(String[] args) throws Exception { //method
-        menu();
+        String email = "chursov@mail.ru";
+        String invalidEmail1 = "ch@mail.ru";
+        String invalidEmail2 = "chursov-mailru";
+
+        String pattern = "[a-zA-Z_0-9]{3,10}@(mail|gmail)\\.(ru|com)";
+//        String pattern = "[a-zA-Z_0-9]{3,30}";
+
+        System.out.println(email.matches(pattern));
+        System.out.println(invalidEmail1.matches(pattern));
+        System.out.println(invalidEmail2.matches(pattern));
     }
 
     static void menu() throws Exception {
