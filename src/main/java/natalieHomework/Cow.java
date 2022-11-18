@@ -34,6 +34,23 @@ public final class Cow extends GrassEater implements Movable{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cow cow = (Cow) o;
+
+        if (sayWord.equals(cow.sayWord) && nickname.equals(cow.nickname) && pairHoof.equals(cow.pairHoof) && name.equals(cow.name) && age == cow.age) {
+            return true;
+        } else return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return sayWord != null ? sayWord.hashCode() : 0;
+    }
+
+    @Override
     public void move() {
         System.out.println("Cow moved a little bit");
     }

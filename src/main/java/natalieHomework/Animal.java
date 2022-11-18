@@ -2,7 +2,7 @@ package natalieHomework;
 
 public abstract class Animal {
     String name;//null
-    int age;//0
+    public int age;//0
     public static int count;
 
     protected Animal(String name, int age) {
