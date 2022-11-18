@@ -1,6 +1,7 @@
 import natalieHomework.Animal;
 import natalieHomework.Cow;
 import natalieHomework.Horse;
+import natalieHomework.Movable;
 
 import java.util.Scanner;
 
@@ -28,5 +29,23 @@ public class Main {
         Cow cow = new Cow("Murka", 2, "Murenocka", true);
         System.out.println("All fields: " + cow);
         System.out.println("All fields: " + horse);
+
+        horse.move();
+        horse.run();
+        cow.move();
+        cow.run();
+
+        horse.putOnSaddle();
+
+        Cow.Сalf calf = new Cow.Сalf(150);
+        calf.born();
+
+        Movable sheep = new Movable() {
+            @Override
+            public void move() {
+                System.out.println("Bleee, I moved");
+            }
+        };
+        sheep.move();
     }
 }

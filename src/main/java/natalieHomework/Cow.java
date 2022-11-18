@@ -1,6 +1,6 @@
 package natalieHomework;
 
-public final class Cow extends GrassEater{
+public final class Cow extends GrassEater implements Movable{
     private  final String sayWord = "Muuuu";
 
     @Override
@@ -31,5 +31,22 @@ public final class Cow extends GrassEater{
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Cow moved a little bit");
+    }
+
+    public static class Сalf {
+        private double weight;
+
+        public Сalf(double weight) {
+            this.weight = weight;
+        }
+
+        public void born() {
+            System.out.println("New calf was born with weight " + weight);
+        }
     }
 }

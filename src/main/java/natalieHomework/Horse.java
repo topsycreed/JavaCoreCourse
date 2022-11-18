@@ -1,6 +1,6 @@
 package natalieHomework;
 
-public final class Horse extends GrassEater{
+public final class Horse extends GrassEater implements Movable{
     private double speed;//0.0d
     private final String sayWord = "Whinny";
 
@@ -40,5 +40,34 @@ public final class Horse extends GrassEater{
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Horse moved a lot");
+    }
+
+    public void putOnSaddle() {
+        Saddle saddle = new Saddle("Brown");
+        saddle.setOn();
+    }
+
+    public class Saddle {
+        boolean isOn = false;
+        String color;
+
+        public Saddle(String color) {
+            this.color = color;
+        }
+
+        public void setOn() {
+            isOn = true;
+            System.out.println("Saddle is " + isOn + " with color " + color);
+        }
+
+        public void setOff() {
+            isOn = false;
+            System.out.println("Saddle is " + isOn);
+        }
     }
 }
