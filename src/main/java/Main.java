@@ -1,38 +1,150 @@
+import natalieHomework.Animal;
+import natalieHomework.Cow;
+import natalieHomework.Horse;
+import natalieHomework.Movable;
+import natalieHomework.OptionNotAvailableException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    // keywords public, static, class, void
-    //main - mame or identifier
-    //all inside // - comment
-    /*
-    multiline comments
-     */
-    public static void main(String[] args) { //method
-        //block
-        System.out.println("Hello, QA!"); //statement
+    static Scanner scanner = new Scanner(System.in);
+    private static final String PREPARED_FILE_NAME = "test.txt";
+    private static List<Cow> cows = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws Exception { //method
+        String email = "chursov@mail.ru";
+        String invalidEmail1 = "ch@mail.ru";
+        String invalidEmail2 = "chursov-mailru";
 
-        System.out.println("Hey, what's your name?");
-        String word1 = scanner.next(); //single word or value
-        System.out.println("Nice to meet you " + word1);
-        scanner.nextLine(); // to ask user input additionally
-        System.out.println("What's your full name?");
-        String line1 = scanner.nextLine(); //line
-        System.out.println(line1 + " Is it correct?");
+        String pattern = "[a-zA-Z_0-9]{3,10}@(mail|gmail)\\.(ru|com)";
+//        String pattern = "[a-zA-Z_0-9]{3,30}";
 
-        System.out.println("Guess how many years I'm as QA?");
+        System.out.println(email.matches(pattern));
+        System.out.println(invalidEmail1.matches(pattern));
+        System.out.println(invalidEmail2.matches(pattern));
+    }
 
-        int value = Integer.parseInt(scanner.next());
-        while(value != 11) {
-            if (Math.abs(11 - value) < 2) {
-                System.out.println("Close, but not correct, try one more time");
-            } else {
-                System.out.println("It's not even close! Try one more time");
+    static void menu() throws Exception {
+        do {
+            System.out.println("""
+                    1. Save a new object to file
+                    2. Read object from file and print
+                    3. Exit
+                    4. Add item to collection
+                    5. Remove item from collection
+                    6. Read items from collection
+                    7. Update field for item from collection""");
+            String str = scanner.nextLine();
+            switch (str) {
+                case "1" -> writeToFile();
+                case "2" -> readFromFile();
+                case "3" -> {
+                    System.out.print("\nBye!");
+                    return;
+                }
+                case "4" -> addToCollection();
+                case "5" -> removeFromCollection();
+                case "6" -> readCollection();
+                case "7" -> updateInCollection();
+                default -> throw new OptionNotAvailableException();
             }
-            value = Integer.parseInt(scanner.next());
         }
-        System.out.println("Correct!");
+        while (true);
+    }
+
+    private static void updateInCollection() {
+        if (cows.isEmpty()) {
+            System.out.println("Cannot update any cow, since there are no cows");
+            return;
+        }
+        System.out.println("Please enter cow name for updating");
+        String cowName = scanner.nextLine();
+        System.out.println("Please enter cow age for updating");
+        String age = scanner.nextLine();
+        Cow cowForUpdate = new Cow(cowName, 1, cowName, true);
+        for (Cow cow : cows) {
+            if (cow.equals(cowForUpdate)) {
+                System.out.println("We found cow for update and updated :)");
+                cow.age = Integer.parseInt(age);
+                return;
+            }
+        }
+        System.out.println("Sorry we didn't found that cow");
+    }
+
+    private static void removeFromCollection() {
+        if (cows.isEmpty()) {
+            System.out.println("Cannot delete any cow, since there are no cows");
+            return;
+        }
+        System.out.println("Please enter cow name for deletion");
+        String str = scanner.nextLine();
+        Cow cowForDelete = new Cow(str, 1, str, true);
+        for (Cow cow : cows) {
+            if (cow.equals(cowForDelete)) {
+                System.out.println("We found cow for deletion and deleted :(");
+                cows.remove(cowForDelete);
+                return;
+            }
+        }
+        System.out.println("Hopefully we didn't found that cow");
+    }
+
+    private static void readCollection() {
+        if (cows.isEmpty()) {
+            System.out.println("There is no cows, please buy a new one");
+        }
+        for (Cow cow : cows) {
+            System.out.println(cow);
+        }
+    }
+
+    private static void addToCollection() {
+        System.out.println("Please enter cow name");
+        String str = scanner.nextLine();
+        Cow cow = new Cow(str, 1, str, true);
+        cows.add(cow);
+    }
+
+    private static void readFromFile() throws FileNotFoundException {
+        File file = new File(PREPARED_FILE_NAME);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            System.out.println(scanner.nextLine());
+        }
+    }
+
+    private static void writeToFile() {
+        File file = new File(PREPARED_FILE_NAME);
+        if (!file.exists()) {
+            try {
+                boolean createdNew = file.createNewFile();
+                if (createdNew) {
+                    System.out.println("The file was successfully created.");
+                } else {
+                    System.out.println("The file already exists.");
+                }
+            } catch (IOException e) {
+                System.out.println("Cannot create the file: " + file.getPath());
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(file, true)) {
+            System.out.println("Please enter cow name");
+            String str = scanner.nextLine();
+            Cow cow = new Cow(str, 1, str, true);
+//            writer.append("\n" + cow);
+            writer.write("\n" + cow);
+        } catch (IOException e) {
+            System.out.printf("An exception occurs %s", e.getMessage());
+        }
     }
 }

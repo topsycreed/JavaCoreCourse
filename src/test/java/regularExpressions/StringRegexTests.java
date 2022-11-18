@@ -6,6 +6,34 @@ import org.junit.jupiter.api.Test;
 public class StringRegexTests {
 
     @Test
+    void emailTest() {
+        String email = "chursov@mail.ru";
+        String invalidEmail1 = "ch@mail.ru";
+        String invalidEmail2 = "chursov-mailru";
+
+        String pattern = "[a-zA-Z_0-9]{3,10}@(mail|gmail)\\.(ru|com)";
+//        String pattern = "[a-zA-Z_0-9]{3,30}";
+
+        System.out.println(email.matches(pattern));
+        System.out.println(invalidEmail1.matches(pattern));
+        System.out.println(invalidEmail2.matches(pattern));
+    }
+
+    @Test
+    void phoneTest() {
+        String phone = "+7(967)46-57-57";
+//        String invalidEmail1 = "ch@mail.ru";
+//        String invalidEmail2 = "chursov-mailru";
+
+        String pattern = "\\+[0-9]{1}\\([0-9]{3}\\)[0-9]{2}-[0-9]{2}-[0-9]{2}";
+//        String pattern = "[a-zA-Z_0-9]{3,30}";
+
+        System.out.println(phone.matches(pattern));
+//        System.out.println(invalidEmail1.matches(pattern));
+//        System.out.println(invalidEmail2.matches(pattern));
+    }
+
+    @Test
     void BasicStringTests() {
         String testRegex = "test"; // the "test" regex
         Assertions.assertTrue("test".matches(testRegex));
